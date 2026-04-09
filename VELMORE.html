@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VELMORE - Prototipo Mejorado</title>
+<style>
+  :root{
+    --bg:#f6f3ed;
+    --surface:#ffffff;
+    --surface-2:#fcfaf6;
+    --text:#171717;
+    --muted:#6a665f;
+    --gold:#8b6b2e;
+    --gold-2:#c9a45a;
+    --line:#e8e0d2;
+    --dark:#121212;
+    --danger:#a83f3f;
+    --ok:#2f7d4a;
+    --shadow:0 10px 30px rgba(0,0,0,.06);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#faf8f3 0%, #f2ece0 100%);
+    color:var(--text);
+  }
+
+  .app{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    min-height:100vh;
+  }
+
+  .sidebar{
+    background:rgba(255,255,255,.92);
+    border-right:1px solid var(--line);
+    padding:24px 18px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:auto;
+    backdrop-filter: blur(8px);
+  }
+
+  .brand{
+    font-size:34px;
+    font-weight:900;
+    letter-spacing:4px;
+    margin-bottom:6px;
+  }
+
+  .tag{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.55;
+    margin-bottom:16px;
+  }
+
+  .status{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:12px 14px;
+    margin-bottom:16px;
+    font-size:13px;
+  }
+
+  .status strong{
+    display:block;
+  }
+
+  .section-title{
+    font-size:12px;
+    letter-spacing:1.5px;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin:18px 4px 10px;
+    font-weight:700;
+  }
+
+  .nav-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:12px 14px;
+    margin:6px 0;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:16px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s ease;
+    box-shadow:0 2px 10px rgba(0,0,0,.02);
+  }
+
+  .nav-btn:hover{
+    transform:translateY(-1px);
+  }
+
+  .nav-btn.active{
+    background:var(--dark);
+    color:#fff;
+    border-color:var(--dark);
+  }
+
+  .logout-btn{
+    width:100%;
+    padding:12px 14px;
+    border:none;
+    border-radius:16px;
+    cursor:pointer;
+    background:var(--danger);
+    color:#fff;
+    font-weight:700;
+    margin-top:12px;
+    display:none;
+  }
+
+  main{
+    padding:28px;
+  }
+
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+
+  .crumbs{
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  .top-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .screen{
+    display:none;
+  }
+
+  .screen.active{
+    display:block;
+  }
+
+  .hero{
+    background:linear-gradient(135deg,#fffdf9,#f4ede1);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:28px;
+    box-shadow:var(--shadow);
+  }
+
+  .headline{
+    font-size:44px;
+    line-height:1.05;
+    margin:0 0 10px;
+  }
+
+  .sub{
+    color:var(--muted);
+    max-width:760px;
+    line-height:1.65;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:22px;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:22px;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .image{
+    aspect-ratio:4/4;
+    border-radius:18px;
+    background:#efe6d5 center/cover no-repeat;
+    margin-bottom:14px;
+    border:1px solid var(--line);
+  }
+
+  .hero-image{
+    min-height:360px;
+    border-radius:24px;
+    border:1px solid var(--line);
+    background:center/cover no-repeat;
+  }
+
+  .name{
+    font-size:20px;
+    font-weight:800;
+    margin:0 0 6px;
+  }
+
+  .meta{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:10px;
+  }
+
+  .price{
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:10px;
+    color:var(--gold);
+  }
+
+  .pill{
+    display:inline-block;
+    padding:8px 12px;
+    border-radius:999px;
+    background:#f4efe5;
+    color:#6b5521;
+    font-weight:800;
+    font-size:12px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+
+  .btn,.btn-outline,.btn-soft,.btn-danger{
+    padding:12px 16px;
+    border-radius:14px;
+    border:none;
+    cursor:pointer;
+    font-weight:800;
+  }
+
+  .btn{
+    background:var(--dark);
+    color:white;
+  }
+
+  .btn-outline{
+    background:#fff;
+    color:var(--text);
+    border:1px solid var(--line);
+  }
+
+  .btn-soft{
+    background:#f3eddf;
+    color:#6b5521;
+    border:1px solid #eadbb7;
+  }
+
+  .btn-danger{
+    background:var(--danger);
+    color:#fff;
+  }
+
+  .toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:18px 0;
+  }
+
+  input, select, textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:#fff;
+    font-size:14px;
+    outline:none;
+  }
+
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--gold-2);
+    box-shadow:0 0 0 3px rgba(201,164,90,.12);
+  }
+
+  label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin:10px 0 8px;
+    font-weight:700;
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+
+  .detail{
+    display:grid;
+    grid-template-columns:420px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+
+  .big-image{
+    min-height:480px;
+    border:1px solid var(--line);
+    border-radius:26px;
+    background:#efe6d5 center/cover no-repeat;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+  }
+
+  th,td{
+    padding:14px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    font-size:14px;
+  }
+
+  th{
+    background:#faf7f1;
+  }
+
+  .kpi{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:18px;
+  }
+
+  .kpi .card h3{
+    margin:0 0 8px;
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  .kpi .card p{
+    margin:0;
+    font-size:28px;
+    font-weight:900;
+  }
+
+  .msg{
+    padding:12px 14px;
+    border-radius:14px;
+    margin-top:12px;
+    font-size:14px;
+    display:none;
+  }
+
+  .msg.ok{
+    background:#ecf8f0;
+    color:var(--ok);
+    border:1px solid #cbe9d5;
+    display:block;
+  }
+
+  .msg.err{
+    background:#fff1f1;
+    color:var(--danger);
+    border:1px solid #efcccc;
+    display:block;
+  }
+
+  .badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f4efe5;
+    color:#6b5521;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .product-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .welcome-box{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:22px;
+    margin-top:22px;
+  }
+
+  .mini-list{
+    display:grid;
+    gap:12px;
+  }
+
+  .mini-item{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:10px;
+    border:1px solid var(--line);
+    border-radius:16px;
+  }
+
+  .mini-thumb{
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    background:center/cover no-repeat;
+    border:1px solid var(--line);
+  }
+
+  .footer-note{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  @media (max-width: 1150px){
+    .app{grid-template-columns:1fr}
+    .sidebar{
+      position:relative;
+      height:auto;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+    }
+    .grid,.kpi,.row,.detail,.grid-2,.welcome-box{
+      grid-template-columns:1fr;
+    }
+    .headline{
+      font-size:34px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">VELMORE</div>
+    <div class="tag">Prototipo mejorado con JavaScript · 10 pantallas · navegación completa · login / logout · imágenes incluidas</div>
+
+    <div class="status">
+      <div>
+        <strong>Sesión</strong>
+        <span id="sessionStatus">Invitado</span>
+      </div>
+      <span class="badge" id="sessionBadge">Offline</span>
+    </div>
+
+    <div class="section-title">Cliente</div>
+    <button class="nav-btn active" data-screen="s1">1. Inicio</button>
+    <button class="nav-btn" data-screen="s2">2. Catálogo</button>
+    <button class="nav-btn" data-screen="s3">3. Búsqueda</button>
+    <button class="nav-btn" data-screen="s4">4. Detalle del perfume</button>
+    <button class="nav-btn" data-screen="s5">5. Contacto / WhatsApp</button>
+
+    <div class="section-title">Administrador</div>
+    <button class="nav-btn" data-screen="s6">6. Iniciar sesión</button>
+    <button class="nav-btn admin-only" data-screen="s7" style="display:none">7. Panel administrativo</button>
+    <button class="nav-btn admin-only" data-screen="s8" style="display:none">8. Registrar producto</button>
+    <button class="nav-btn admin-only" data-screen="s9" style="display:none">9. Editar producto</button>
+    <button class="nav-btn admin-only" data-screen="s10" style="display:none">10. Eliminar producto</button>
+
+    <button class="logout-btn" id="logoutBtn" onclick="logout()">Cerrar sesión</button>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div class="crumbs" id="breadcrumbs">VELMORE / Inicio</div>
+      <div class="top-actions">
+        <button class="btn-outline" onclick="goBack()">← Regresar</button>
+        <button class="btn-outline" onclick="goForward()">Avanzar →</button>
+      </div>
+    </div>
+
+    <section id="s1" class="screen active">
+      <div class="hero">
+        <div class="pill">Pantalla 1</div>
+        <h1 class="headline">Sistema Web de Catálogo de Perfumes VELMORE</h1>
+        <p class="sub">Pantalla principal del sistema. Presenta la propuesta de valor, acceso al catálogo, beneficios y navegación hacia las funcionalidades más importantes del sistema.</p>
+        <div class="toolbar">
+          <button class="btn" onclick="go('s2')">Ver catálogo</button>
+          <button class="btn-soft" onclick="openFeatured(1)">Ver producto destacado</button>
+          <button class="btn-outline" onclick="go('s5')">Contactar</button>
+        </div>
+      </div>
+
+      <div class="welcome-box">
+        <div class="grid">
+          <div class="card">
+            <div class="image" id="home1"></div>
+            <h3 class="name">Perfumes originales</h3>
+            <div class="meta">Garantía de autenticidad y catálogo visual organizado.</div>
+          </div>
+          <div class="card">
+            <div class="image" id="home2"></div>
+            <h3 class="name">Compra rápida</h3>
+            <div class="meta">Acceso directo a detalle del producto y contacto inmediato.</div>
+          </div>
+          <div class="card">
+            <div class="image" id="home3"></div>
+            <h3 class="name">Experiencia responsive</h3>
+            <div class="meta">Visualización óptima en móvil, tablet y computadora.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="hero-image" id="heroVisual"></div>
+          <div class="toolbar">
+            <button class="btn" onclick="go('s2')">Explorar colección</button>
+            <button class="btn-outline" onclick="go('s6')">Acceso administrador</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s2" class="screen">
+      <div class="pill">Pantalla 2</div>
+      <h2>Catálogo de perfumes</h2>
+      <p class="sub">Visualización general del catálogo organizado por categorías.</p>
+      <div class="toolbar">
+        <input id="searchBox" placeholder="Buscar perfume..." oninput="filterCatalog()" />
+        <select id="catFilter" onchange="filterCatalog()">
+          <option value="">Todas las categorías</option>
+          <option>Masculino</option>
+          <option>Femenino</option>
+          <option>Unisex</option>
+        </select>
+      </div>
+      <div id="catalog" class="grid"></div>
+    </section>
+
+    <section id="s3" class="screen">
+      <div class="pill">Pantalla 3</div>
+      <h2>Búsqueda y filtrado de productos</h2>
+      <p class="sub">Permite filtrar perfumes por nombre, marca o categoría para facilitar la consulta del usuario.</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="row">
+            <div>
+              <label>Nombre del perfume</label>
+              <input id="quickSearch" placeholder="Ej. Khamrah" oninput="syncSearch()" />
+            </div>
+            <div>
+              <label>Categoría</label>
+              <select id="quickCat" onchange="syncSearch()">
+                <option value="">Todas</option>
+                <option>Masculino</option>
+                <option>Femenino</option>
+                <option>Unisex</option>
+              </select>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" onclick="syncSearch(); go('s2')">Buscar</button>
+            <button class="btn-outline" onclick="clearSearch()">Limpiar filtros</button>
+            <button class="btn-soft" onclick="go('s2')">Ver resultados en catálogo</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="name">Sugerencias rápidas</h3>
+          <div class="mini-list" id="suggestions"></div>
+        </div>
+      </div>
+      <div class="footer-note">Esta pantalla se vincula con el requisito funcional RF02: búsqueda de productos.</div>
+    </section>
+
+    <section id="s4" class="screen">
+      <div class="pill">Pantalla 4</div>
+      <h2>Detalle del perfume</h2>
+      <p class="sub">Muestra información ampliada del producto seleccionado.</p>
+      <div class="detail">
+        <div class="big-image" id="detailImage"></div>
+        <div class="card">
+          <h3 id="detailName" class="name" style="font-size:32px"></h3>
+          <div id="detailCat" class="meta"></div>
+          <div id="detailPrice" class="price"></div>
+          <p id="detailDesc" class="sub"></p>
+          <div class="toolbar product-actions">
+            <button class="btn" onclick="go('s5')">Contactar por WhatsApp</button>
+            <button class="btn-outline" onclick="go('s2')">Volver al catálogo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="screen">
+      <div class="pill">Pantalla 5</div>
+      <h2>Contacto y redirección a WhatsApp</h2>
+      <p class="sub">Pantalla destinada a iniciar contacto directo con el negocio.</p>
+      <div class="card">
+        <div class="row">
+          <div>
+            <label>Nombre</label>
+            <input id="name" placeholder="Nombre del cliente" />
+          </div>
+          <div>
+            <label>Producto de interés</label>
+            <input id="product" placeholder="Perfume seleccionado" />
+          </div>
+        </div>
+        <label>Mensaje</label>
+        <textarea id="message" rows="5">Hola, deseo más información sobre este perfume.</textarea>
+        <div class="toolbar">
+          <button class="btn" onclick="fakeWhatsApp()">Abrir WhatsApp</button>
+          <button class="btn-outline" onclick="go('s2')">Seguir explorando</button>
+        </div>
+        <div id="waPreview" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="s6" class="screen">
+      <div class="pill">Pantalla 6</div>
+      <h2>Inicio de sesión del administrador</h2>
+      <p class="sub">Control de acceso al panel administrativo.</p>
+      <div class="card" style="max-width:540px">
+        <label>Usuario</label>
+        <input id="user" placeholder="admin" />
+        <label>Contraseña</label>
+        <input id="pass" type="password" placeholder="••••••••" />
+        <div class="toolbar">
+          <button class="btn" onclick="login()">Ingresar</button>
+        </div>
+        <div class="footer-note">Credenciales de demostración: <strong>admin / 123456</strong></div>
+        <div id="loginMsg" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="s7" class="screen">
+      <div class="pill">Pantalla 7</div>
+      <h2>Panel administrativo</h2>
+      <p class="sub">Dashboard para la gestión del catálogo.</p>
+      <div class="kpi">
+        <div class="card"><h3>Productos</h3><p id="kpiProducts">0</p></div>
+        <div class="card"><h3>Categorías</h3><p id="kpiCategories">0</p></div>
+        <div class="card"><h3>Consultas</h3><p>18</p></div>
+        <div class="card"><h3>Estado</h3><p>Activo</p></div>
+      </div>
+      <div class="toolbar">
+        <button class="btn" onclick="go('s8')">Registrar producto</button>
+        <button class="btn-outline" onclick="go('s9')">Editar producto</button>
+        <button class="btn-danger" onclick="go('s10')">Eliminar producto</button>
+      </div>
+      <table>
+        <thead><tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Categoría</th><th>Precio</th></tr></thead>
+        <tbody id="adminTable"></tbody>
+      </table>
+    </section>
+
+    <section id="s8" class="screen">
+      <div class="pill">Pantalla 8</div>
+      <h2>Registrar nuevo producto</h2>
+      <div class="card">
+        <div class="row">
+          <div><label>Nombre</label><input id="newName" /></div>
+          <div><label>Categoría</label><select id="newCat"><option>Masculino</option><option>Femenino</option><option>Unisex</option></select></div>
+        </div>
+        <div class="row">
+          <div><label>Precio</label><input id="newPrice" type="number" /></div>
+          <div><label>Marca</label><input id="newBrand" /></div>
+        </div>
+        <label>Descripción</label><textarea id="newDesc" rows="4"></textarea>
+        <label>URL de imagen (opcional)</label><input id="newImage" placeholder="Se usará una imagen por defecto si lo dejas vacío" />
+        <div class="toolbar">
+          <button class="btn" onclick="addProduct()">Guardar producto</button>
+          <button class="btn-outline" onclick="go('s7')">Volver al panel</button>
+        </div>
+        <div id="addMsg" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="s9" class="screen">
+      <div class="pill">Pantalla 9</div>
+      <h2>Editar producto</h2>
+      <div class="card">
+        <label>Seleccione producto</label>
+        <select id="editSelect" onchange="loadEditForm()"></select>
+        <div class="row">
+          <div><label>Nombre</label><input id="editName" /></div>
+          <div><label>Categoría</label><select id="editCat"><option>Masculino</option><option>Femenino</option><option>Unisex</option></select></div>
+        </div>
+        <div class="row">
+          <div><label>Precio</label><input id="editPrice" type="number" /></div>
+          <div><label>Marca</label><input id="editBrand" /></div>
+        </div>
+        <label>Descripción</label><textarea id="editDesc" rows="4"></textarea>
+        <label>URL de imagen</label><input id="editImage" />
+        <div class="toolbar">
+          <button class="btn" onclick="saveEdit()">Guardar cambios</button>
+          <button class="btn-outline" onclick="go('s7')">Volver al panel</button>
+        </div>
+        <div id="editMsg" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="s10" class="screen">
+      <div class="pill">Pantalla 10</div>
+      <h2>Eliminar producto</h2>
+      <div class="card">
+        <label>Seleccione producto a eliminar</label>
+        <select id="deleteSelect"></select>
+        <div class="toolbar">
+          <button class="btn-danger" onclick="deleteProduct()">Eliminar</button>
+          <button class="btn-outline" onclick="go('s7')">Cancelar</button>
+        </div>
+        <div id="deleteMsg" class="msg"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const placeholderImages = [
+  makeImg('Khamrah','Lattafa'),
+  makeImg('9PM','Afnan'),
+  makeImg('Sublime','Lattafa'),
+  makeImg('Club de Nuit','Armaf'),
+  makeImg('Velmore','Luxury')
+];
+
+const products = [
+  {id:1,name:"Khamrah",category:"Unisex",brand:"Lattafa",price:169,desc:"Fragancia dulce, cálida y especiada con gran duración.",image:placeholderImages[0]},
+  {id:2,name:"9PM",category:"Masculino",brand:"Afnan",price:159,desc:"Aroma intenso, juvenil y elegante para uso nocturno.",image:placeholderImages[1]},
+  {id:3,name:"Sublime",category:"Femenino",brand:"Lattafa",price:149,desc:"Fragancia frutal y floral con salida brillante.",image:placeholderImages[2]},
+  {id:4,name:"Club de Nuit Intense",category:"Masculino",brand:"Armaf",price:175,desc:"Fragancia sofisticada con carácter cítrico y amaderado.",image:placeholderImages[3]}
+];
+
+const screenTitles = {
+  s1:'Inicio', s2:'Catálogo', s3:'Búsqueda', s4:'Detalle del perfume', s5:'Contacto / WhatsApp',
+  s6:'Iniciar sesión', s7:'Panel administrativo', s8:'Registrar producto', s9:'Editar producto', s10:'Eliminar producto'
+};
+
+let isAdmin = false;
+let historyStack = ['s1'];
+let historyIndex = 0;
+
+function makeImg(title, subtitle='VELMORE'){
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="900">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#efe5d2"/>
+          <stop offset="100%" stop-color="#d4b47a"/>
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+      <rect x="80" y="80" width="740" height="740" rx="40" fill="rgba(255,255,255,.18)" stroke="#fff3" />
+      <text x="50%" y="44%" font-family="Arial" text-anchor="middle" font-size="68" font-weight="800" fill="#5c4317">${escapeXml(title)}</text>
+      <text x="50%" y="54%" font-family="Arial" text-anchor="middle" font-size="34" fill="#6f5720">${escapeXml(subtitle)}</text>
+      <text x="50%" y="85%" font-family="Arial" text-anchor="middle" font-size="28" fill="#6f5720">Perfume original · Catálogo VELMORE</text>
+    </svg>`;
+  return `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+}
+
+function escapeXml(str){
+  return String(str).replace(/[&<>'"]/g, s => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&apos;','"':'&quot;'}[s]
+  ));
+}
+
+function setStaticImages(){
+  document.getElementById('home1').style.backgroundImage = placeholderImages[0];
+  document.getElementById('home2').style.backgroundImage = placeholderImages[4];
+  document.getElementById('home3').style.backgroundImage = placeholderImages[2];
+  document.getElementById('heroVisual').style.backgroundImage = placeholderImages[3];
+}
+
+function setMessage(id, text, type='ok'){
+  const el = document.getElementById(id);
+  el.className = `msg ${type}`;
+  el.textContent = text;
+}
+
+function clearMessage(id){
+  const el = document.getElementById(id);
+  el.className = 'msg';
+  el.textContent = '';
+}
+
+function updateBreadcrumbs(id){
+  document.getElementById('breadcrumbs').textContent = `VELMORE / ${screenTitles[id] || id}`;
+}
+
+function pushHistory(id){
+  if(historyStack[historyIndex] === id) return;
+  historyStack = historyStack.slice(0, historyIndex + 1);
+  historyStack.push(id);
+  historyIndex = historyStack.length - 1;
+}
+
+function internalGo(id, addToHistory=true){
+  const adminScreens = ['s7','s8','s9','s10'];
+
+  if(adminScreens.includes(id) && !isAdmin){
+    id = 's6';
+    setMessage('loginMsg', 'Debes iniciar sesión para acceder al módulo administrativo.', 'err');
+  }
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.nav-btn[data-screen="${id}"]`);
+  if(btn) btn.classList.add('active');
+
+  updateBreadcrumbs(id);
+  if(addToHistory) pushHistory(id);
+
+  if(id === 's2') renderCatalog(filteredProducts());
+  if(id === 's3') renderSuggestions();
+  if(id === 's7') renderAdmin();
+  if(id === 's9') fillEditSelect();
+  if(id === 's10') fillDeleteSelect();
+}
+
+function go(id){ internalGo(id, true); }
+
+function goBack(){
+  if(historyIndex > 0){
+    historyIndex--;
+    internalGo(historyStack[historyIndex], false);
+  }
+}
+
+function goForward(){
+  if(historyIndex < historyStack.length - 1){
+    historyIndex++;
+    internalGo(historyStack[historyIndex], false);
+  }
+}
+
+function updateSessionUI(){
+  document.getElementById('sessionStatus').textContent = isAdmin ? 'Administrador' : 'Invitado';
+  document.getElementById('sessionBadge').textContent = isAdmin ? 'Online' : 'Offline';
+  document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
+  document.getElementById('logoutBtn').style.display = isAdmin ? 'block' : 'none';
+}
+
+function filteredProducts(){
+  const q = (document.getElementById('searchBox')?.value || '').toLowerCase().trim();
+  const cat = document.getElementById('catFilter')?.value || '';
+  return products.filter(p =>
+    (!q || p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)) &&
+    (!cat || p.category === cat)
+  );
+}
+
+function renderCatalog(list){
+  const box = document.getElementById('catalog');
+  box.innerHTML = '';
+
+  if(!list.length){
+    box.innerHTML = `<div class="card"><h3 class="name">No se encontraron productos</h3><div class="meta">Intenta con otro nombre o categoría.</div></div>`;
+    return;
+  }
+
+  list.forEach(p=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.innerHTML = `
+      <div class="image" style="background-image:${p.image}"></div>
+      <h3 class="name">${p.name}</h3>
+      <div class="meta">${p.brand} · ${p.category}</div>
+      <div class="price">S/ ${p.price.toFixed(2)}</div>
+      <div class="toolbar" style="margin:10px 0 0">
+        <button class="btn" onclick="openDetail(${p.id})">Ver detalle</button>
+      </div>
+    `;
+    box.appendChild(card);
+  });
+}
+
+function renderSuggestions(){
+  const box = document.getElementById('suggestions');
+  box.innerHTML = '';
+
+  products.slice(0,3).forEach(p=>{
+    const item = document.createElement('div');
+    item.className = 'mini-item';
+    item.innerHTML = `
+      <div class="mini-thumb" style="background-image:${p.image}"></div>
+      <div style="flex:1">
+        <div class="name" style="font-size:16px;margin:0">${p.name}</div>
+        <div class="meta">${p.brand} · ${p.category}</div>
+      </div>
+      <button class="btn-soft" onclick="openDetail(${p.id})">Ver</button>
+    `;
+    box.appendChild(item);
+  });
+}
+
+function filterCatalog(){
+  renderCatalog(filteredProducts());
+}
+
+function syncSearch(){
+  document.getElementById('searchBox').value = document.getElementById('quickSearch').value;
+  document.getElementById('catFilter').value = document.getElementById('quickCat').value;
+}
+
+function clearSearch(){
+  document.getElementById('quickSearch').value = '';
+  document.getElementById('quickCat').value = '';
+  document.getElementById('searchBox').value = '';
+  document.getElementById('catFilter').value = '';
+  renderCatalog(products);
+}
+
+function openFeatured(id){
+  openDetail(id);
+}
+
+function openDetail(id){
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+
+  document.getElementById('detailImage').style.backgroundImage = p.image;
+  document.getElementById('detailName').textContent = p.name;
+  document.getElementById('detailCat').textContent = `Categoría: ${p.category} · Marca: ${p.brand}`;
+  document.getElementById('detailPrice').textContent = `S/ ${p.price.toFixed(2)}`;
+  document.getElementById('detailDesc').textContent = p.desc;
+  document.getElementById('product').value = p.name;
+  go('s4');
+}
+
+function fakeWhatsApp(){
+  const name = document.getElementById('name').value || 'Cliente';
+  const product = document.getElementById('product').value || 'perfume';
+  const msg = document.getElementById('message').value.trim();
+  setMessage('waPreview', `Vista previa del mensaje: Hola, soy ${name}. Estoy interesado en ${product}. ${msg}`, 'ok');
+}
+
+function login(){
+  clearMessage('loginMsg');
+  const u = document.getElementById('user').value.trim();
+  const p = document.getElementById('pass').value.trim();
+  const ok = u === 'admin' && p === '123456';
+
+  if(ok){
+    isAdmin = true;
+    updateSessionUI();
+    setMessage('loginMsg', 'Acceso correcto. Bienvenido al panel administrativo.', 'ok');
+    setTimeout(()=>go('s7'), 600);
+  }else{
+    setMessage('loginMsg', 'Credenciales incorrectas. Usa admin / 123456 para la demostración.', 'err');
+  }
+}
+
+function logout(){
+  isAdmin = false;
+  updateSessionUI();
+  go('s1');
+}
+
+function renderAdmin(){
+  document.getElementById('kpiProducts').textContent = products.length;
+  document.getElementById('kpiCategories').textContent = new Set(products.map(p=>p.category)).size;
+
+  const tbody = document.getElementById('adminTable');
+  tbody.innerHTML = '';
+
+  products.forEach(p=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${p.id}</td><td>${p.name}</td><td>${p.brand}</td><td>${p.category}</td><td>S/ ${p.price.toFixed(2)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function addProduct(){
+  clearMessage('addMsg');
+
+  const name = document.getElementById('newName').value.trim();
+  const category = document.getElementById('newCat').value;
+  const brand = document.getElementById('newBrand').value.trim();
+  const price = Number(document.getElementById('newPrice').value);
+  const desc = document.getElementById('newDesc').value.trim();
+  const imageUrl = document.getElementById('newImage').value.trim();
+
+  if(!name || !brand || !price || !desc){
+    setMessage('addMsg', 'Completa todos los campos obligatorios para registrar el producto.', 'err');
+    return;
+  }
+
+  const p = {
+    id: products.length ? Math.max(...products.map(x=>x.id))+1 : 1,
+    name,
+    category,
+    brand,
+    price,
+    desc,
+    image: imageUrl ? `url("${imageUrl}")` : makeImg(name, brand)
+  };
+
+  products.push(p);
+
+  document.getElementById('newName').value = '';
+  document.getElementById('newBrand').value = '';
+  document.getElementById('newPrice').value = '';
+  document.getElementById('newDesc').value = '';
+  document.getElementById('newImage').value = '';
+
+  setMessage('addMsg', `Producto registrado: ${p.name}`, 'ok');
+  renderAdmin();
+  renderCatalog(filteredProducts());
+  fillEditSelect();
+  fillDeleteSelect();
+}
+
+function fillEditSelect(){
+  const sel = document.getElementById('editSelect');
+  sel.innerHTML = products.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  loadEditForm();
+}
+
+function loadEditForm(){
+  const id = Number(document.getElementById('editSelect').value || products[0]?.id);
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+
+  document.getElementById('editName').value = p.name;
+  document.getElementById('editCat').value = p.category;
+  document.getElementById('editPrice').value = p.price;
+  document.getElementById('editBrand').value = p.brand;
+  document.getElementById('editDesc').value = p.desc;
+  document.getElementById('editImage').value = p.image.startsWith('url("http') ? p.image.slice(5,-2) : '';
+}
+
+function saveEdit(){
+  clearMessage('editMsg');
+
+  const id = Number(document.getElementById('editSelect').value);
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+
+  const name = document.getElementById('editName').value.trim();
+  const category = document.getElementById('editCat').value;
+  const price = Number(document.getElementById('editPrice').value);
+  const brand = document.getElementById('editBrand').value.trim();
+  const desc = document.getElementById('editDesc').value.trim();
+  const imageUrl = document.getElementById('editImage').value.trim();
+
+  if(!name || !brand || !price || !desc){
+    setMessage('editMsg', 'Completa todos los campos obligatorios antes de guardar.', 'err');
+    return;
+  }
+
+  p.name = name;
+  p.category = category;
+  p.price = price;
+  p.brand = brand;
+  p.desc = desc;
+  p.image = imageUrl ? `url("${imageUrl}")` : makeImg(name, brand);
+
+  setMessage('editMsg', `Cambios guardados para ${p.name}`, 'ok');
+  renderAdmin();
+  renderCatalog(filteredProducts());
+  fillDeleteSelect();
+}
+
+function fillDeleteSelect(){
+  const sel = document.getElementById('deleteSelect');
+  sel.innerHTML = products.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+}
+
+function deleteProduct(){
+  clearMessage('deleteMsg');
+
+  const id = Number(document.getElementById('deleteSelect').value);
+  const index = products.findIndex(x=>x.id===id);
+
+  if(index >= 0){
+    const removed = products.splice(index,1)[0];
+    setMessage('deleteMsg', `Producto eliminado: ${removed.name}`, 'ok');
+    fillDeleteSelect();
+    renderAdmin();
+    renderCatalog(filteredProducts());
+    fillEditSelect();
+  }else{
+    setMessage('deleteMsg', 'No se pudo eliminar el producto seleccionado.', 'err');
+  }
+}
+
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>go(btn.dataset.screen));
+});
+
+setStaticImages();
+updateSessionUI();
+renderCatalog(products);
+renderAdmin();
+renderSuggestions();
+fillDeleteSelect();
+fillEditSelect();
+updateBreadcrumbs('s1');
+</script>
+</body>
+</html>
