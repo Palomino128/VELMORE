@@ -1,0 +1,16 @@
+body{margin:0;font-family:Arial;background:#f6f3ed;color:#171717}
+header{background:white;padding:20px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{font-size:30px;font-weight:900;letter-spacing:4px}
+nav a{margin:0 8px;color:#171717;text-decoration:none;font-weight:bold}
+main{max-width:1150px;margin:auto;padding:28px}
+.hero,.panel,.card{background:white;border:1px solid #e8e0d2;border-radius:20px;padding:20px;box-shadow:0 8px 20px #0001}
+.hero h1{font-size:40px;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:18px}
+.img{height:190px;border-radius:16px;background:linear-gradient(135deg,#efe5d2,#d4b47a);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;color:#5c4317;padding:15px}
+.btn{display:inline-block;background:#121212;color:white;padding:11px 15px;border-radius:12px;text-decoration:none;border:none;font-weight:bold;margin:4px 2px;cursor:pointer}
+.btn.alt{background:#f3ede0;color:#6b5521}.btn.danger{background:#a83f3f;color:white}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;margin:7px 0}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+.alert{background:#ecf8f0;color:#2f7d4a;padding:12px;border-radius:12px;margin-top:10px}.error{background:#fff1f1;color:#a83f3f}
+.split{display:grid;grid-template-columns:420px 1fr;gap:20px}.filters{display:grid;grid-template-columns:1fr 220px 140px;gap:10px;align-items:end}
+@media(max-width:800px){.split,.filters{grid-template-columns:1fr}.hero h1{font-size:30px}}
