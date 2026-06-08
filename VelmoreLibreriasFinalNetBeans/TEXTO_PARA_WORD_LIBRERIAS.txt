@@ -1,0 +1,21 @@
+INCORPORACIÓN DE LIBRERÍAS DE APOYO A LA CODIFICACIÓN
+
+En el desarrollo del sistema web VELMORE se incorporaron librerías de apoyo a la codificación con el objetivo de mejorar la eficiencia, funcionalidad, mantenimiento y seguridad del proyecto.
+
+Google Guava:
+Se utilizó Google Guava para mejorar la eficiencia del sistema mediante el uso de colecciones y caché. En el proyecto se aplica en el DAO para manejar listas de productos y en el servicio de productos para almacenar temporalmente el catálogo activo, reduciendo operaciones repetitivas.
+
+Apache POI:
+Se utilizó Apache POI para generar reportes en formato Excel. Esta librería permite que el administrador descargue un archivo .xlsx con el listado de productos registrados, incluyendo ID, nombre, marca, categoría, precio y stock.
+
+Apache Commons:
+Se utilizó Apache Commons Lang para validar y limpiar textos, evitando errores por campos vacíos o nulos. También se incorporó Apache Commons IO como apoyo para el manejo de flujos de salida al generar el reporte Excel.
+
+Logback:
+Se utilizó Logback para registrar eventos importantes del sistema, como carga de productos, registros, eliminaciones, uso de caché e intentos de acceso al panel administrativo. Esto permite mejorar el control y monitoreo del sistema.
+
+Consideraciones de seguridad:
+El sistema considera medidas básicas de seguridad para el tratamiento de información, tales como login de administrador, control de sesión, protección de rutas administrativas mediante interceptor, validación de datos de entrada y registro de eventos importantes mediante logs.
+
+Conclusión:
+El proyecto cumple el criterio solicitado porque incorpora librerías de apoyo como Google Guava, Apache POI, Apache Commons y Logback, mejorando la funcionalidad, eficiencia, mantenimiento y seguridad del sistema.
