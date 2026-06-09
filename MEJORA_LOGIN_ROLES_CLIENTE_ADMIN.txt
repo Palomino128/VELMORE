@@ -1,0 +1,32 @@
+MEJORA REALIZADA: LOGIN ÚNICO CON PERFIL DE CLIENTE Y ADMINISTRADOR
+
+Se cambió el sistema para que exista un solo Login.
+
+Credenciales:
+1. Cliente:
+   usuario: cliente
+   clave: 123456
+   Redirige a: /perfil
+
+2. Administrador:
+   usuario: admin
+   clave: 123456
+   Redirige a: /admin
+
+Funcionamiento:
+- El cliente ingresa a su perfil y puede ver catálogo, productos recomendados y hacer pedido por WhatsApp.
+- El administrador ingresa al panel administrativo para registrar y eliminar productos.
+- Las rutas /admin/** y /reporte/** están protegidas.
+- Si un cliente intenta entrar a /admin, el sistema lo redirige a /perfil.
+
+Archivos agregados/modificados:
+- Usuario.java
+- AuthService.java
+- AuthServiceImpl.java
+- PerfilController.java
+- AdminController.java
+- LoginInterceptor.java
+- login.html
+- perfil.html
+
+Esto mejora la seguridad y separa claramente las funciones del cliente y del administrador.

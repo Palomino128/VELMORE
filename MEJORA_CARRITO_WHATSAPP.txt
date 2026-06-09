@@ -1,0 +1,22 @@
+MEJORA REALIZADA: SELECCIÓN DE UNO O MÁS PRODUCTOS
+
+Se agregó una nueva pantalla para que el cliente pueda seleccionar un solo producto o varios productos antes de contactar por WhatsApp.
+
+Nueva ruta:
+http://localhost:8081/carrito
+
+Funcionamiento:
+1. El cliente entra a Carrito.
+2. Selecciona uno o más perfumes.
+3. Indica cantidades.
+4. Escribe su nombre.
+5. Genera el mensaje.
+6. Presiona Abrir WhatsApp.
+
+Archivos agregados:
+- CarritoController.java
+- CarritoService.java
+- CarritoItemDto.java
+- carrito.html
+
+Esto mejora el alcance comercial del sistema porque permite contacto por compra individual o pedido múltiple.

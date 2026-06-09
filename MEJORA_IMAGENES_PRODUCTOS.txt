@@ -1,0 +1,26 @@
+MEJORA REALIZADA: IMÁGENES DE PRODUCTOS
+
+Se incorporaron imágenes para los perfumes del catálogo.
+
+Ubicación:
+src/main/resources/static/img/productos/
+
+Archivos incluidos:
+- khamrah.png
+- qahwa.png
+- 9pm.png
+- sublime.png
+- club.png
+- yara.png
+- amber.png
+- asad.png
+- nuevo.png
+
+Cambios realizados:
+1. Se agregó el atributo imagen en Producto.java.
+2. Se asignó una imagen a cada producto desde InMemoryProductoDao.java.
+3. Se actualizaron las vistas Thymeleaf para mostrar imágenes reales.
+4. Se agregó CSS para que las imágenes se vean ordenadas y profesionales.
+5. Los productos nuevos usan la imagen por defecto nuevo.png.
+
+Esto mejora la UI/UX y ayuda a que el prototipo cubra mejor el alcance visual del catálogo.
