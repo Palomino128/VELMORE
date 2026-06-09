@@ -1,0 +1,11 @@
+IMPLEMENTACIÓN DE LIBRERÍAS, GIT, UI/UX Y BUENAS PRÁCTICAS
+
+El proyecto VELMORE incorpora librerías de apoyo a la codificación para mejorar la eficiencia, funcionalidad, mantenimiento y seguridad del sistema. Se utilizó Google Guava para optimizar el catálogo mediante caché y colecciones; Apache POI para generar reportes Excel de productos; Apache Commons para validar y limpiar datos de entrada; y Logback para registrar eventos importantes del sistema.
+
+Asimismo, el proyecto considera aspectos básicos de seguridad para el tratamiento de la información. Se implementó login de administrador, control de sesión, logout, protección de rutas administrativas y de reportes mediante interceptores, validación de datos y cabeceras de seguridad para reducir riesgos básicos.
+
+El proyecto también se encuentra preparado para el uso de Git y GitHub. Se incluye archivo .gitignore, documentación del flujo de commits y guía para evidenciar el 100% de avances en la plataforma GitHub. Esto permite demostrar trazabilidad de los cambios y actualizaciones realizadas durante el desarrollo.
+
+En cuanto a la interfaz gráfica UI/UX, la solución implementa pantallas de inicio, catálogo, detalle del producto, contacto, login y panel administrativo. Estas interfaces cubren el 100% del alcance comprometido, ya que permiten visualizar productos, buscar, revisar detalle, contactar al negocio, iniciar sesión, registrar, editar, eliminar productos y descargar reportes.
+
+Finalmente, la solución informática es completa, coherente y aplica buenas prácticas. Es completa porque cubre el alcance funcional comprometido; es coherente porque la documentación está alineada con el código; aplica buenas prácticas porque usa librerías adecuadas, patrón MVC, patrón DAO, separación por capas, validadores, servicios y control de versiones; y demuestra autoría porque el estudiante puede explicar la estructura, ejecución y funcionamiento de cada módulo desarrollado.

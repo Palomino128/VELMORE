@@ -1,0 +1,25 @@
+MEJORAS REALIZADAS
+
+1. Imágenes de productos mejoradas:
+Se agregaron imágenes premium para cada perfume dentro de:
+src/main/resources/static/img/productos/
+
+2. Conexión a WhatsApp:
+En la pantalla Contacto ahora aparece el botón "Abrir WhatsApp".
+El sistema genera un enlace automático usando wa.me con el mensaje del cliente.
+
+3. Número de WhatsApp:
+Cambia el número en:
+src/main/resources/application.properties
+
+Línea:
+velmore.whatsapp.numero=51999999999
+
+Formato correcto para Perú:
+51 + número
+Ejemplo:
+velmore.whatsapp.numero=51987654321
+
+4. Puerto:
+El proyecto corre en:
+http://localhost:8081

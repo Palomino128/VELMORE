@@ -1,0 +1,49 @@
+2026-06-09 13:16:33 INFO  p.e.v.VelmoreLibreriasApplication - Starting VelmoreLibreriasApplication using Java 26.0.1 with PID 6832 (C:\Users\edupa\Downloads\VelmoreFinalIngeniero_DB_GUAVA\VelmoreFinalIngeniero_FIXED\target\classes started by edupa in C:\Users\edupa\Downloads\VelmoreFinalIngeniero_DB_GUAVA\VelmoreFinalIngeniero_FIXED)
+2026-06-09 13:16:33 INFO  p.e.v.VelmoreLibreriasApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-09 13:16:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-09 13:16:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74 ms. Found 1 JPA repository interface.
+2026-06-09 13:16:35 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-06-09 13:16:35 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-06-09 13:16:35 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-09 13:16:35 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-09 13:16:35 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-09 13:16:35 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1509 ms
+2026-06-09 13:16:35 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-09 13:16:35 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-09 13:16:35 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-09 13:16:36 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-09 13:16:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-09 13:16:36 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26ca12a2
+2026-06-09 13:16:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-09 13:16:36 WARN  org.hibernate.dialect.Dialect - HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2026-06-09 13:16:36 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-09 13:16:37 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-09 13:16:38 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-09 13:16:39 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-09 13:16:40 INFO  p.e.velmore.dao.InMemoryProductoDao - Productos iniciales cargados: 8
+2026-06-09 13:16:40 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-09 13:16:41 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-06-09 13:16:41 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2026-06-09 13:16:41 INFO  p.e.v.VelmoreLibreriasApplication - Started VelmoreLibreriasApplication in 7.733 seconds (process running for 8.119)
+2026-06-09 13:16:41 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-09 13:16:41 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-09 13:16:41 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-09 13:16:41 INFO  p.e.v.service.ProductoServiceImpl - [CACHE MISS] Cargando catálogo desde BD...
+2026-06-09 13:16:41 INFO  p.e.v.service.ProductoServiceImpl - [CACHE STORE] 0 productos activos en caché
+2026-06-09 13:16:48 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=1, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:49 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=2, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:51 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=3, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:51 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=4, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:51 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=5, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:51 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=6, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:54 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=7, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:54 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=8, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:54 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=9, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:54 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=10, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:56 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=11, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:56 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=12, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:56 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=13, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:56 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=14, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:16:59 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=15, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:17:00 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=16, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2026-06-09 13:17:04 INFO  p.e.v.service.ProductoServiceImpl - [CACHE HIT] Catálogo desde Guava. Stats: CacheStats{hitCount=17, missCount=1, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
