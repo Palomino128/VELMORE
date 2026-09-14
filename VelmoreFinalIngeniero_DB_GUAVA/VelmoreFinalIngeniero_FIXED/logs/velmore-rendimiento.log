@@ -1,0 +1,2 @@
+2026-07-09 13:23:53.676 INFO  [http-nio-8081-exec-1] p.e.v.monitor.RendimientoInterceptor - [PERF]          GET    /login                              →  283ms | status=200
+2026-07-09 13:23:53.725 INFO  [http-nio-8081-exec-2] p.e.v.monitor.RendimientoInterceptor - [PERF]          GET    /styles.css                         →   10ms | status=200
