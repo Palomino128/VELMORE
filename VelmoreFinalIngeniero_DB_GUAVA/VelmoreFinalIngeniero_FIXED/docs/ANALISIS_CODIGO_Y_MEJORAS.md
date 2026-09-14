@@ -6,10 +6,9 @@ El proyecto incorpora todas las librerías de apoyo solicitadas:
 
 | Librería | Archivo donde se usa | Propósito |
 |---|---|---|
-| Google Guava | `ProductoServiceImpl.java`, `InMemoryProductoDao.java` | Caché del catálogo, listas y mejora de eficiencia |
+| Google Guava | `ProductoServiceImpl.java`, `InMemoryProductoDao.java`, `ProductoValidator.java` | Caché del catálogo, listas inmutables, Preconditions y mejora de eficiencia |
 | Apache POI | `ReporteExcelService.java` | Generación de reporte Excel `.xlsx` |
 | Apache Commons Lang | `ProductoValidator.java`, `AuthServiceImpl.java`, `ContactoServiceImpl.java` | Validación segura de textos, limpieza de entradas y comparación de cadenas |
-| Apache Commons IO | `ReporteExcelService.java` | Manejo del flujo de salida del archivo Excel |
 | Logback | `logback-spring.xml` y servicios Java | Registro de eventos, errores e intentos de acceso |
 
 ## 2. Seguridad aplicada
